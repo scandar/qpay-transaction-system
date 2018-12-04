@@ -1,7 +1,9 @@
 import express from 'express';
+import debug from 'debug';
 import getUser from './controllers/user';
 
 const app = express();
+const log = debug('app');
 
 /**
  * Handles controller execution and responds to user (API Express version).
@@ -25,5 +27,5 @@ const c = controllerHandler; // Just a name shortener.
 app.get('/users/:username', c(getUser, req => [req.params.username]));
 
 app.listen(3000, () => {
-  console.log('listening on port 3000');
+  log('listening on port 3000');
 });
