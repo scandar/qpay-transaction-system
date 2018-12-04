@@ -1,13 +1,9 @@
 import User from '../models/User';
 
-export function getUser(username) {
-  return User.find({ username }).exec();
-  // Just as a mongoose
-  // reminder, .exec() on find
-  // returns a Promise instead
-  // of the default callback.
-}
+// Just as a mongoose
+// reminder, .exec() on find
+// returns a Promise instead
+// of the default callback.
+export const getUser = username => User.find({ username }).exec();
 
-export function isChucknorris(username) {
-  return username === 'Chuck Norris';
-}
+export const isChucknorris = username => username === 'Chuck Norris';
