@@ -1,5 +1,5 @@
-import express, { Router } from 'express';
+import express from 'express';
 import bootstrap from './bootstrap';
 
 const app = express();
-bootstrap(app, Router());
+bootstrap(app);

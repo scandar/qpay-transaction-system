@@ -4,7 +4,7 @@ import connection from './connection';
 import server from './server';
 import routes from '../routes';
 
-const bootstrap = (app, Router) => {
+const bootstrap = (app) => {
   // Sets environment variables
   dotenv.config();
 
@@ -15,7 +15,7 @@ const bootstrap = (app, Router) => {
   setMiddlewares(app);
 
   // Set Routes
-  routes(app, Router);
+  routes(app);
 
   // Start Server
   server(app);
