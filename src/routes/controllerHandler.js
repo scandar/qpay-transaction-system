@@ -13,10 +13,16 @@ const controllerHandler = (promise, params) => async (req, res, next) => {
   const boundParams = params ? params(req, res, next) : [];
   try {
     const result = await promise(...boundParams);
-    return res.json(result || { message: 'OK' });
+    return res.json(result || {
+      status: { code: 200, message: 'success' },
+      data: [],
+    });
   } catch (error) {
     log(error);
-    return res.status(500).json({ error: error.message });
+    return res.status(400).json({
+      status: { code: 400, message: 'something went wrong' },
+      errors: [error.message],
+    });
   }
 };
 

@@ -1,7 +1,7 @@
 import debug from 'debug';
 import mongoose from 'mongoose';
 
-const log = debug('app:routes:controllerHandler');
+const log = debug('app:bootstrap:connection');
 
 const mongodb = async () => {
   let conncetionString = 'mongodb://';

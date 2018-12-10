@@ -1,4 +1,4 @@
-import { getUser as getUserService } from '../services/user';
+import { getUser as getUserService, registerUser as registerUserService } from '../services/user';
 
 /**
  * Get a user by username.
@@ -12,6 +12,11 @@ export const getUser = async (username) => {
 
   const user = await getUserService(username);
   return user;
+};
+
+export const registerUser = async (user) => {
+  const response = await registerUserService(user);
+  return response;
 };
 
 export const extraFunction = () => {
