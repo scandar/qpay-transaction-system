@@ -1,4 +1,10 @@
-import { getUser as getUserService, registerUser as registerUserService } from '../services/user';
+import {
+  getUser as getUserService,
+  registerUser as registerUserService,
+  loginUser as loginUserService,
+  renewToken as renewTokenService,
+  isPhoneDuplicate as isPhoneDuplicateService,
+} from '../services/user';
 
 /**
  * Get a user by username.
@@ -14,11 +20,22 @@ export const getUser = async (username) => {
   return user;
 };
 
-export const registerUser = async (user) => {
-  const response = await registerUserService(user);
+export const registerUser = async (req) => {
+  const response = await registerUserService(req);
   return response;
 };
 
-export const extraFunction = () => {
+export const loginUser = async (req) => {
+  const response = await loginUserService(req);
+  return response;
+};
 
+export const renewToken = async (token) => {
+  const response = await renewTokenService(token);
+  return response;
+};
+
+export const isPhoneDuplicate = async (phoneNumber) => {
+  const response = await isPhoneDuplicateService(phoneNumber);
+  return response;
 };

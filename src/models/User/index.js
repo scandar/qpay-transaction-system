@@ -31,5 +31,14 @@ userSchema.pre('validate', async function formatPhone(next) {
   next();
 });
 
+userSchema.statics.formatPhone = (phoneNumber) => {
+  let number = phoneNumber;
+
+  if (number.length > 11 && number.indexOf('002') === 0) number = number.replace('002', '');
+  if (number.length > 11 && number.indexOf('+2') === 0) number = number.replace('+2', '');
+  if (number.length === 10 && number.indexOf('0') !== 0) number = `${0}${number}`;
+  return number;
+};
+
 const User = mongoose.model('User', userSchema);
 export default User;
