@@ -24,7 +24,7 @@ export const renewJwt = (token) => {
     throw new Error('invalid token');
   }
 
-  const authToken = sign({ _id: decodedToken._id }, process.env.JWT_KEY, { expiresIn: 1 });
+  const authToken = sign({ _id: decodedToken._id }, process.env.JWT_KEY, { expiresIn: '1h' });
   return authToken;
 };
 
