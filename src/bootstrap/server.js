@@ -1,6 +1,6 @@
 import debug from 'debug';
 
-const log = debug('app:server');
+const log = debug('app:bootstrap:server');
 
 const server = (app) => {
   app.listen(process.env.PORT, () => {
