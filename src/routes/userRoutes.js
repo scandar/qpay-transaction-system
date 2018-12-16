@@ -1,3 +1,4 @@
+import sanitize from '../middleware/sanitize';
 import {
   registerUser,
   loginUser,
@@ -6,6 +7,9 @@ import {
 } from '../controllers/user';
 
 const router = (Router, controllerHandler) => {
+  // middleware to sanitize user input
+  Router.use(sanitize);
+
   Router.route('/register')
     .post(controllerHandler(registerUser, req => [req.body]));
 
