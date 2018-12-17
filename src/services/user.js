@@ -1,5 +1,5 @@
-import { Types } from 'mongoose';
 import { compare } from 'bcrypt';
+import { Types } from 'mongoose';
 import jwt from 'jsonwebtoken';
 import User from '../models/User';
 import { renewJwt } from '../middleware/jwtAuth';
@@ -12,7 +12,6 @@ export const getUser = username => User.find({ username }).exec();
 
 export const registerUser = async (req) => {
   const newUser = new User({
-    _id: Types.ObjectId(),
     phone: req.phone,
     name: req.name,
     password: req.password,
@@ -32,7 +31,7 @@ export const registerUser = async (req) => {
 };
 
 export const loginUser = async (req) => {
-  const user = await User.findOne({ phone: req.phone });
+  const user = await User.findOne({ phone: req.phone }).select(['password', '_id']);
   const compared = await compare(req.password, user.password);
 
   if (!user || !compared) {
@@ -81,6 +80,28 @@ export const isPhoneDuplicate = async (phoneNumber) => {
       message: 'success',
     },
     data: [{ isDuplicate: Boolean(user) }],
+  };
+};
+
+export const getUserBalance = async (userId) => {
+  const user = await User.findOne({ _id: new Types.ObjectId(userId) });
+
+  if (!user) {
+    return {
+      status: {
+        code: 400,
+        message: 'failed',
+      },
+      errors: ['user not found'],
+    };
+  }
+
+  return {
+    status: {
+      code: 200,
+      message: 'success',
+    },
+    data: [{ amount: parseFloat(user.balance.amount).toFixed(2) }],
   };
 };
 

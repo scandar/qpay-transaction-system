@@ -4,6 +4,7 @@ import {
   loginUser as loginUserService,
   renewToken as renewTokenService,
   isPhoneDuplicate as isPhoneDuplicateService,
+  getUserBalance as getUserBalanceService,
 } from '../services/user';
 
 /**
@@ -37,5 +38,10 @@ export const renewToken = async (token) => {
 
 export const isPhoneDuplicate = async (phoneNumber) => {
   const response = await isPhoneDuplicateService(phoneNumber);
+  return response;
+};
+
+export const getUserBalance = async (req) => {
+  const response = await getUserBalanceService(req.userId);
   return response;
 };

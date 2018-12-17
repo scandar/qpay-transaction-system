@@ -1,9 +1,11 @@
 import sanitize from '../middleware/sanitize';
+import jwtAuth from '../middleware/jwtAuth';
 import {
   registerUser,
   loginUser,
   renewToken,
   isPhoneDuplicate,
+  getUserBalance,
 } from '../controllers/user';
 
 const router = (Router, controllerHandler) => {
@@ -21,6 +23,10 @@ const router = (Router, controllerHandler) => {
 
   Router.route('/phone/:phoneNumber/duplicate')
     .get(controllerHandler(isPhoneDuplicate, req => [req.params.phoneNumber]));
+
+  Router.route('/balance')
+    .all(jwtAuth)
+    .get(controllerHandler(getUserBalance, req => [req]));
 
   return Router;
 };

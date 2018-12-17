@@ -1,3 +1,6 @@
+import debug from 'debug';
+
+const log = debug('app:routes:handler');
 /**
  * Handles controller execution and responds to user (API Express version).
  * Web socket has a similar handler implementation.
@@ -17,6 +20,7 @@ const controllerHandler = (promise, params) => async (req, res, next) => {
         data: [],
       });
   } catch (error) {
+    log(error);
     return res.status(400).json({
       status: { code: 400, message: 'something went wrong' },
       errors: [error.message],
