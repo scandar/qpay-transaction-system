@@ -5,8 +5,8 @@ import {
   loginUser,
   renewToken,
   isPhoneDuplicate,
-  getUserBalance,
 } from '../controllers/user';
+import { getUserBalance } from '../controllers/balance';
 
 const router = (Router, controllerHandler) => {
   // middleware to sanitize user input

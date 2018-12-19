@@ -1,4 +1,5 @@
 import debug from 'debug';
+import { success, fail } from '../helpers/responses';
 
 const log = debug('app:routes:handler');
 /**
@@ -15,16 +16,10 @@ const controllerHandler = (promise, params) => async (req, res, next) => {
 
     return res
       .status(result.status.code || 200)
-      .json(result || {
-        status: { code: 200, message: 'success' },
-        data: [],
-      });
+      .json(result || success());
   } catch (error) {
     log(error);
-    return res.status(400).json({
-      status: { code: 400, message: 'something went wrong' },
-      errors: [error.message],
-    });
+    return res.status(400).json(fail([error.message], 'something went wrong'));
   }
 };
 

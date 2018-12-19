@@ -4,7 +4,6 @@ import {
   loginUser as loginUserService,
   renewToken as renewTokenService,
   isPhoneDuplicate as isPhoneDuplicateService,
-  getUserBalance as getUserBalanceService,
 } from '../services/user';
 
 /**
@@ -12,7 +11,7 @@ import {
  * @param username a string value that represents user's username.
  * @returns A Promise, an exception or a value.
  */
-export const getUser = async (username) => {
+const getUser = async (username) => {
   if (username === '') {
     throw new Error('Username can\'t be blank');
   }
@@ -21,27 +20,30 @@ export const getUser = async (username) => {
   return user;
 };
 
-export const registerUser = async (req) => {
+const registerUser = async (req) => {
   const response = await registerUserService(req);
   return response;
 };
 
-export const loginUser = async (req) => {
+const loginUser = async (req) => {
   const response = await loginUserService(req);
   return response;
 };
 
-export const renewToken = async (token) => {
+const renewToken = async (token) => {
   const response = await renewTokenService(token);
   return response;
 };
 
-export const isPhoneDuplicate = async (phoneNumber) => {
+const isPhoneDuplicate = async (phoneNumber) => {
   const response = await isPhoneDuplicateService(phoneNumber);
   return response;
 };
 
-export const getUserBalance = async (req) => {
-  const response = await getUserBalanceService(req.userId);
-  return response;
+export {
+  getUser,
+  registerUser,
+  loginUser,
+  renewToken,
+  isPhoneDuplicate,
 };
