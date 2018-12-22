@@ -13,7 +13,7 @@ const registerUser = async (req) => {
   await newUser.save();
 
   const authToken = jwt.sign({ _id: newUser._id }, process.env.JWT_KEY, { expiresIn: '1h' });
-  return success([{ authToken }]);
+  return success([{ authToken, userId: newUser._id }]);
 };
 
 const loginUser = async (req) => {
@@ -24,7 +24,7 @@ const loginUser = async (req) => {
   if (!compared) return fail(['auth failed']);
 
   const authToken = jwt.sign({ _id: user._id }, process.env.JWT_KEY, { expiresIn: '1h' });
-  return success([{ authToken }]);
+  return success([{ authToken, userId: user._id }]);
 };
 
 const renewToken = async token => success([{ authToken: renewJwt(token) }]);

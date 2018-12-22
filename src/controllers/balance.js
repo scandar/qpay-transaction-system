@@ -1,5 +1,7 @@
+import SendBalanceRequest from '../requests/SendBalance';
 import {
   getUserBalance as getUserBalanceService,
+  sendBalance as sendBalanceService,
 } from '../services/balance';
 
 const getUserBalance = async (req) => {
@@ -7,5 +9,15 @@ const getUserBalance = async (req) => {
   return response;
 };
 
-// eslint-disable-next-line import/prefer-default-export
-export { getUserBalance };
+const sendBalance = async (req) => {
+  const request = new SendBalanceRequest({
+    senderId: req.userId,
+    receiverId: req.body.receiverId,
+    amount: req.body.amount,
+  });
+
+  const response = await sendBalanceService(request);
+  return response;
+};
+
+export { getUserBalance, sendBalance };

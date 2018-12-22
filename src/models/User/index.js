@@ -30,9 +30,11 @@ userSchema.pre('save', async function bcrypt(next) {
 });
 
 userSchema.pre('validate', async function formatPhone(next) {
-  if (this.phone.length > 11 && this.phone.indexOf('002') === 0) this.phone = this.phone.replace('002', '');
-  if (this.phone.length > 11 && this.phone.indexOf('+2') === 0) this.phone = this.phone.replace('+2', '');
-  if (this.phone.length === 10 && this.phone.indexOf('0') !== 0) this.phone = `${0}${this.phone}`;
+  if (this.phone) {
+    if (this.phone.length > 11 && this.phone.indexOf('002') === 0) this.phone = this.phone.replace('002', '');
+    if (this.phone.length > 11 && this.phone.indexOf('+2') === 0) this.phone = this.phone.replace('+2', '');
+    if (this.phone.length === 10 && this.phone.indexOf('0') !== 0) this.phone = `${0}${this.phone}`;
+  }
   next();
 });
 
