@@ -1,5 +1,6 @@
 import { Types } from 'mongoose';
 import User from '../models/User';
+import TransactionHistory from '../models/TransactionHistory';
 import { success, fail } from '../helpers/responses';
 
 
@@ -10,8 +11,8 @@ const getUserBalance = async (userId) => {
 };
 
 const sendBalance = async (req) => {
-  const sender = await User.findOne({ _id: new Types.ObjectId(req.senderId) }).select('balance');
-  const receiver = await User.findOne({ _id: new Types.ObjectId(req.receiverId) }).select('balance');
+  const sender = await User.findOne({ _id: new Types.ObjectId(req.senderId) }).select('balance _id');
+  const receiver = await User.findOne({ _id: new Types.ObjectId(req.receiverId) }).select('balance _id');
   if (!sender || !receiver) return fail(['something went wrong']);
 
   // check if the amount is valid
@@ -22,8 +23,15 @@ const sendBalance = async (req) => {
   sender.balance.amount = senderBalance - req.amount;
   receiver.balance.amount = receiverBalance + req.amount;
 
+  const history = new TransactionHistory({
+    sender: sender._id,
+    receiver: receiver._id,
+    amount: req.amount,
+  });
+
   await sender.save();
   await receiver.save();
+  await history.save();
 
   return success([{ currentBalance: parseFloat(sender.balance.amount).toFixed(2) }]);
 };

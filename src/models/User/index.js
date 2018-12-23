@@ -4,7 +4,7 @@ import validate from './validate';
 import UserBalance, { userBalanceSchema } from '../UserBalance';
 
 const userSchema = new Schema({
-  _id: { type: Schema.Types.ObjectId, default: new mongoose.Types.ObjectId() },
+  _id: { type: Schema.Types.ObjectId },
   name: {
     type: String,
     validate: [{ validator: validate.name, msg: 'name length must be between 3 and 20 characters' }],
@@ -23,6 +23,7 @@ const userSchema = new Schema({
 }, { timestamps: true });
 
 userSchema.pre('save', async function bcrypt(next) {
+  this._id = new mongoose.Types.ObjectId();
   if (this.password) {
     this.password = await hash(this.password, 10);
   }
