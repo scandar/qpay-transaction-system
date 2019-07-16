@@ -1,8 +1,8 @@
 # QPay
 
-QPay is a money transaction app
-It's a personal project that i didn't finish
-This is the first phase of the application
+QPay is a money transaction app, It's a personal project that i didn't finish.
+
+This is the first phase of the application.
   - user authentication
     - register
     - login
