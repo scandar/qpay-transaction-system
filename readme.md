@@ -1,5 +1,19 @@
 # QPay
 
+QPay is a money transaction app
+It's a personal project that i didn't finish
+This is the first phase of the application
+  - user authentication
+    - register
+    - login
+    - renew JWT token
+  - balance management
+    - get user balance
+    - send balance to another user
+
+## API Documentation
+API documentation can be found [here](https://documenter.getpostman.com/view/5845507/SVSKMp21?version=latest)
+
 ### Installation
 
 QPay requires [Node.js](https://nodejs.org/) to run.
