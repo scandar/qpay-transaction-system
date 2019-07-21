@@ -1,6 +1,6 @@
 # QPay
 
-QPay is a money transaction app, It's a personal project that i didn't finish.
+### QPay is a money transaction app, It's a personal project that i didn't finish.
 
 This is the first phase of the application.
   - user authentication
@@ -10,6 +10,8 @@ This is the first phase of the application.
   - balance management
     - get user balance
     - send balance to another user
+
+##### The Way this should work is by scanning a user's QR code through a mobile app and then calling the send balance API with the user's ID and transaction amount
 
 ## API Documentation
 API documentation can be found [here](https://documenter.getpostman.com/view/5845507/SVSKMp21?version=latest)
