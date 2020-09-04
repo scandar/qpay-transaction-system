@@ -32,7 +32,7 @@
     "express": "4.16.4",
     "helmet": "3.15.0",
     "jsonwebtoken": "8.4.0",
-    "mongodb": "3.1.10",
+    "mongodb": "3.1.13",
     "mongoose": "5.7.5",
     "validator": "10.9.0"
   },
